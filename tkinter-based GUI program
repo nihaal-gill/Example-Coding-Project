@@ -1,7 +1,6 @@
 from tkinter import Tk, Canvas, Frame, Button, Label, Entry, END, LEFT, BOTTOM, TOP, RIGHT, SUNKEN
 import random
 
-
 class MathGame():
     def __init__(self):
         self.questionType = random.choice(['addition', 'subtraction', 'multiplication', 'division'])
