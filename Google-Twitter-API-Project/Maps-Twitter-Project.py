@@ -1,3 +1,15 @@
+#Language: Python
+
+#Important Note: I lost access to my Twitter developer API so it does not show the tweets. But if you have a working Google Maps API and 
+#a Twitter developer API you can input those into the program and will as it is said in the description.
+
+#Description: This program creates a tkinter-based GUI that enables the user to enter a location and search terms. The search term(s)
+#is then ran through the program 'twitteracess.py' and returns all the tweets in a 2 kilometer radius of the location that the user has 
+#entered. Then on the static google map it has markers showing the locations of the tweets returned by the search. For tweets that 
+#don't have specific geocode information, it puts a pin for that tweet in the center of the map. The marker for the currently displayed 
+#tweet should looks different than markers for the other tweets. It also displays the number of tweets retrieved, the link to the tweet,
+#and the ability to 'step through' each tweet by clicking on the 'next' and 'back' button.
+
 import tkinter
 from tkinter import Tk, Canvas, Frame, Button, Label, Entry, END, LEFT, BOTTOM, TOP, RIGHT, SUNKEN
 import math
@@ -16,42 +28,9 @@ lat = 0
 lng = 0
 urlIndex = 0
 
-#
-# In HW8 Q2 and HW 9, you will use two Google services, Google Static Maps API
-# and Google Geocoding API.  Both require use of an API key.
-# You have two options for getting an API key:
-#   1. (STRONGLY RECOMMENDED and WORTH 1 POINT on each assigment)
-#     Get your own.  I think it is a valuable learning experience to see how
-#     signing up for and using these services works.
-#     Getting a key requires that you have a Google account *and* that you
-#     "enable billing" BUT I guarantee you can do this homework for free. Google
-#     provides a free trial that provides $300 worth of API usage and that amount
-#     is *far* more than you will use, and provided $200/mo free Maps-related
-#     free. The chances are small that you'd use more than $1/day while working
-#     on the homework. You can get your free account here. (It actually includes
-#     much more than just access to Google Maps services):
-#     https://console.cloud.google.com
-#     You can also start here:
-#        https://developers.google.com/maps/documentation/geocoding/get-api-key
-#
-#   2. Use the API key for the class that I will provide separate via ICON on
-#      ICON. If you use this one *DO NOT* share it with anyone outside the class.
-#
-# When you have the API key, put it between the quotes in the string below
+
 GOOGLEAPIKEY = "AIzaSyCSKoYf7PqR5gfAe8I_hLGTmVciV616Ij0"
 
-
-# To run the HW9 program, call the last function in this file: HW9().
-
-# The Globals class demonstrates a better style of managing "global variables"
-# than simply scattering the globals around the code and using "global x" within
-# functions to identify a variable as global.
-#
-# We make all of the variables that we wish to access from various places in the
-# program properties of this Globals class.  They get initial values here
-# and then can be referenced and set anywhere in the program via code like
-# e.g. Globals.zoomLevel = Globals.zoomLevel + 1
-#
 class Globals:
     rootWindow = None
     mapLabel = None
@@ -94,19 +73,6 @@ def geocodeAddress(addressString):
     loc = jsonResult['results'][0]['geometry']['location']
     return (float(loc['lat']), float(loc['lng']))
 
-
-# Contruct a Google Static Maps API URL that specifies a map that is:
-# - is centered at provided latitude lat and longitude long
-#
-# - Globals.mapSize-by-Globals.mapsize in size (in pixels),
-# - is "zoomed" to the Google Maps zoom level in Globals.zoomLevel
-#
-# See https://developers.google.com/maps/documentation/static-maps/
-#
-# YOU WILL NEED TO MODIFY THIS TO BE ABLE TO
-# 1) DISPLAY A PIN ON THE MAP
-# 2) SPECIFY MAP TYPE - terrain vs road vs ...
-#
 def getMapUrl(lat, lng):
     urlbase = "http://maps.google.com/maps/api/staticmap?"
     args = "center={},{}&zoom={}&size={}x{}&maptype={}&{},{}{}&sensor=false&format=gif".format(lat, lng, Globals.zoomLevel, Globals.mapSize,
@@ -114,14 +80,6 @@ def getMapUrl(lat, lng):
     args = args + "&key=" + GOOGLEAPIKEY
     mapURL = urlbase + args
     return mapURL
-
-
-# Retrieve a map image via Google Static Maps API:
-# - centered at the location specified by global propery mapLocation
-# - zoomed according to global property zoomLevel (Google's zoom levels range from 0 to 21)
-# - width and height equal to global property mapSize
-# Store the returned image in file name specified by global variable mapFileName
-#
 
 def retrieveMapFromGoogle():
     global lat, lng, mapCenterLatLon
@@ -148,8 +106,6 @@ def readEntriesSearchTwitterAndDisplayMap():
     Globals.currentTweetIndex = 0
     Globals.TweetNum = 1
     urlIndex = 0
-    #### you should change this function to read from the location from an Entry widget
-    #### instead of using the default location
     locationString = Globals.locationEntry.get()
     Globals.mapLocation = locationString
     lat, lng = geocodeAddress(Globals.mapLocation)
@@ -271,11 +227,7 @@ def initializeGUIetc():
     mainFrame = tkinter.Frame(Globals.rootWindow)
     mainFrame.pack()
 
-    # until you add code, pressing this button won't change the map (except
-    # once, to the Beijing location "hardcoded" into readEntryAndDisplayMap)
-    # you need to add an Entry widget that allows you to type in an address
-    # The click function should extract the location string from the Entry widget
-    # and create the appropriate map.
+   
     readEntriesSearchTwitterAndDisplayMapButton = tkinter.Button(mainFrame, text="Show me the map!", command=readEntriesSearchTwitterAndDisplayMap)
     readEntriesSearchTwitterAndDisplayMapButton.pack()
 
