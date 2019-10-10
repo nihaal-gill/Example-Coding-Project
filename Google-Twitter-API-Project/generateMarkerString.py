@@ -1,3 +1,7 @@
+#Language: Python
+
+#Description: This program returns the marker url for the marker for the currently displayed tweet for the 'Maps-Twitter-Project.'
+
 def generateMarkerString(currentTweetIndex, tweetLatLonList, mapCenterLatLon):
     stringRed = '&markers=color:red|'
     stringBlue = '&markers=color:blue|size:small|'
