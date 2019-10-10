@@ -1,3 +1,8 @@
+#Language: Python
+
+#Description: Gets access to Twitter and then retrieves all of the tweets from the location, that the user has entered in the 
+#'Maps-Twitter-Project' file, in a 2 kilometer radius. After gathering the tweets, the informtion is then read into 'Maps-Twitter-Project.'
+
 import oauth2 as oauth
 from urllib.parse import quote_plus
 import json
@@ -36,7 +41,7 @@ def authTwitter():
 # Try:
 #      tweets = searchTwitter("finals")
 #
-# Iowa City's lat/lng is [41.6611277, -91.5301683] so also try:
+# Iowa City's lat/lng is [41.6611277, -91.5301683]:
 #      tweets = searchTwitter("finals", latlngcenter=[41.6611277, -91.5301683])
 #
 # To find tweets with location, it's often helpful to search in big cities.
@@ -81,11 +86,7 @@ def printable(s):
     return result
 
 
-#####
 
-# You don't need the following functions for HW 9. They are just additional
-# examples of Twitter API use.
-#
 def whoIsFollowedBy(screenName):
     global response
     global resultDict
