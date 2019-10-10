@@ -1,5 +1,3 @@
-#
-
 class Box():
     def __init__(self, centerX = 0.0, centerY = 0.0, centerZ = 0.0, width = 1.0, height = 1.0, depth = 1.0):
         self.centerX = centerX
