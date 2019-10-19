@@ -1,6 +1,6 @@
 Question 1: The code below is given below and I have to figure out to make a one line list comprehension from it.
 #listOfNumbers is a list of only numbers
-#
+
 def processList(listOfNumbers):
     result = []
     for i in listOfNumbers:
